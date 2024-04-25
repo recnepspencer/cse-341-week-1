@@ -1,10 +1,12 @@
-const routes = require('express').Router();
-const lesson1Controller = require('../controllers/lesson1');
+import { Router } from 'express';
+import { spencerRoute, estherRoute, brotherBirchRoute, jesusRoute } from '../controllers/lesson1';
 
 
-routes.get("/spencer", lesson1Controller.spencerRoute);
-routes.get("/esther", lesson1Controller.estherRoute);
-routes.get("/brother-birch", lesson1Controller.brotherBirchRoute);
-routes.get("/jesus", lesson1Controller.jesusRoute);
+const routes = Router();
 
-module.exports = routes;
+routes.get("/spencer", spencerRoute);
+routes.get("/esther", estherRoute);
+routes.get("/brother-birch", brotherBirchRoute);
+routes.get("/jesus", jesusRoute);
+
+export default routes;
