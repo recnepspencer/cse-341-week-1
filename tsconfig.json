@@ -3,10 +3,9 @@
     "module": "commonjs",
     "target": "es6",
     "outDir": "./dist",
-    "rootDir": "./src",
     "esModuleInterop": true,
     "strict": true
   },
-  "include": ["src/**/*"],       // Source files are here
-  "exclude": ["node_modules"]    // Don't include node_modules
+  "include": ["src/**/*"],
+  "exclude": ["**/*.spec.ts", "node_modules"]
 }
