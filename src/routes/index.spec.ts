@@ -73,3 +73,74 @@ describe('Contact routes', () => {
         }]);
     });
 });
+test('GET /contacts/:id retrieves a single contact', async () => {
+    const mockGetContact = contactController.getContact as jest.MockedFunction<typeof contactController.getContact>;
+    mockGetContact.mockImplementation(async (req: Request, res: Response) => {
+        if (req.params.id === '123') {
+            return res.status(200).json({
+                id: '123',
+                firstName: 'Bob',
+                lastName: 'Brown',
+                email: 'bob.brown@example.com',
+                favoriteColor: 'red',
+                birthday: '1992-08-10'
+            });
+        } else {
+            return res.status(404).json({ message: 'Contact not found.' });
+        }
+    });
+
+    const response = await request(app).get('/contacts/123');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+        id: '123',
+        firstName: 'Bob',
+        lastName: 'Brown',
+        email: 'bob.brown@example.com',
+        favoriteColor: 'red',
+        birthday: '1992-08-10'
+    });
+});
+test('PUT /contacts/:id updates a contact', async () => {
+    const mockUpdateContact = contactController.updateContact as jest.MockedFunction<typeof contactController.updateContact>;
+    mockUpdateContact.mockImplementation(async (req: Request, res: Response) => {
+        if (req.params.id === '123') {
+            return res.status(200).json({
+                id: '123',
+                ...req.body
+            });
+        } else {
+            return res.status(404).json({ message: 'Contact not found.' });
+        }
+    });
+
+    const updatedContact = {
+        firstName: 'Robert',
+        email: 'bob.newemail@example.com',
+        favoriteColor: 'blue',
+    };
+
+    const response = await request(app)
+        .put('/contacts/123')
+        .send(updatedContact);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+        id: '123',
+        ...updatedContact
+    });
+});
+test('DELETE /contacts/:id deletes a contact', async () => {
+    const mockDeleteContact = contactController.deleteContact as jest.MockedFunction<typeof contactController.deleteContact>;
+    mockDeleteContact.mockImplementation(async (req: Request, res: Response) => {
+        if (req.params.id === '123') {
+            return res.status(204).json({});
+        } else {
+            return res.status(404).json({ message: 'Contact not found.' });
+        }
+    });
+
+    const response = await request(app).delete('/contacts/123');
+    expect(response.status).toBe(204);
+    expect(response.body).toEqual({});
+});

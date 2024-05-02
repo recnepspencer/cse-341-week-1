@@ -1,22 +1,30 @@
-import express from 'express';
+import express, { Router } from 'express';
 
-function createRoutes(controller: any) {
+function createRoutes(controller: any, entityName: string): Router {
     const router = express.Router();
 
-    if (controller.createContact) {
-        router.post('/', controller.createContact);
+    const capitalizedEntityName = entityName.charAt(0).toUpperCase() + entityName.slice(1);
+
+    const createHandler = `create${capitalizedEntityName}`;
+    const getHandler = `get${capitalizedEntityName}`;
+    const getMultipleHandler = `get${capitalizedEntityName}s`;
+    const updateHandler = `update${capitalizedEntityName}`;
+    const deleteHandler = `delete${capitalizedEntityName}`;
+
+    if (controller[createHandler]) {
+        router.post('/', controller[createHandler]);
     }
-    if (controller.getContacts) {
-        router.get('/', controller.getContacts);
+    if (controller[getMultipleHandler]) {
+        router.get('/', controller[getMultipleHandler]);
     }
-    if (controller.getContact) {
-        router.get('/:id', controller.getContact);
+    if (controller[getHandler]) {
+        router.get('/:id', controller[getHandler]);
     }
-    if (controller.updateContact) {
-        router.put('/:id', controller.updateContact);
+    if (controller[updateHandler]) {
+        router.put('/:id', controller[updateHandler]);
     }
-    if (controller.deleteContact) {
-        router.delete('/:id', controller.deleteContact);
+    if (controller[deleteHandler]) {
+        router.delete('/:id', controller[deleteHandler]);
     }
 
     return router;

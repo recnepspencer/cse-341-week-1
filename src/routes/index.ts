@@ -10,7 +10,7 @@ routes.get("/esther", estherRoute);
 routes.get("/brother-birch", brotherBirchRoute);
 routes.get("/jesus", jesusRoute);
 
-routes.use('/contacts', createRoutes(contactController));
+routes.use('/contacts', createRoutes(contactController, 'contact'));
 
 
 export default routes;
