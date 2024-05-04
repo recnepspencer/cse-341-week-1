@@ -5,7 +5,7 @@ import * as contactController from '../controllers/ContactController'
 
 const routes = Router();
 
-routes.get("/spencer", spencerRoute);
+routes.get("/", spencerRoute);
 routes.get("/esther", estherRoute);
 routes.get("/brother-birch", brotherBirchRoute);
 routes.get("/jesus", jesusRoute);

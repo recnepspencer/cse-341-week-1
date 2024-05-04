@@ -5,7 +5,7 @@ import * as contactController from '../controllers/ContactController';
 
 describe('API Routes', () => {
     test('GET /spencer should return "Spencer is cool"', async () => {
-        const response = await request(app).get('/spencer');
+        const response = await request(app).get('/');
         expect(response.status).toBe(200);
         expect(response.text).toContain('Spencer is cool');
     });
