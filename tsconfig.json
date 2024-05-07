@@ -5,9 +5,8 @@
     "target": "es6",
     "outDir": "./dist",
     "esModuleInterop": true,
-    "strict": true,
-    "types": ["node", "mongoose", "dotenv", "express"]
+    "strict": true
   },
-  "include": ["src/**/*" ],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["*.ts", "*.json", "src/**/*" ],
+  "exclude": ["node_modules"]
 }

@@ -61,7 +61,7 @@ export const updateContact = async (req: Request, res: Response) => {
         if (!updatedContact) {
             return res.status(404).json({ message: 'Contact not found.' });
         }
-        res.status(200).json(updatedContact);
+        res.status(204).json(updatedContact);
     } catch (error) {
         if (isMongoError(error)) {
             res.status(500).json({ message: error.message });
@@ -78,7 +78,7 @@ export const deleteContact = async (req: Request, res: Response) => {
         if (!deletedContact) {
             return res.status(404).json({ message: 'Contact not found.' });
         }
-        res.status(204).json({ message: 'Contact deleted successfully.' });
+        res.status(200).json({ message: 'Contact deleted successfully.' });
     } catch (error) {
         if (isMongoError(error)) {
             res.status(500).json({ message: error.message });
